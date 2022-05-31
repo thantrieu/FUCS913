@@ -425,16 +425,43 @@ namespace L913Exercises2
                         }
                         break;
                     case 21:
-                        
+                        if(registers.Count > 0)
+                        {
+                            studentUtils.FindMostRegistedSubjects();
+                        } else
+                        {
+                            Console.WriteLine("==> Danh sách đăng ký rỗng <==");
+                        }
                         break;
                     case 22:
-
+                        if (registers.Count > 0)
+                        {
+                            studentUtils.FindMostRegistedStudents();
+                        }
+                        else
+                        {
+                            Console.WriteLine("==> Danh sách đăng ký rỗng <==");
+                        }
                         break;
                     case 23:
-
+                        if (registers.Count > 0)
+                        {
+                            studentUtils.FindEarliestRegistedStudents();
+                        }
+                        else
+                        {
+                            Console.WriteLine("==> Danh sách đăng ký rỗng <==");
+                        }
                         break;
                     case 24:
-
+                        if (registers.Count > 0)
+                        {
+                            studentUtils.FindLatestRegistedStudents();
+                        }
+                        else
+                        {
+                            Console.WriteLine("==> Danh sách đăng ký rỗng <==");
+                        }
                         break;
                     case 25:
                         Console.WriteLine("==> Cảm ơn quý khách đã sử dụng dịch vụ! <==");

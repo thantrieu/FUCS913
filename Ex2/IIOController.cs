@@ -6,11 +6,11 @@ namespace L913Exercises2
     interface IIOController
     {
         // lưu danh sách sinh viên vào csdl
-        void SaveStudentsData(List<Student> students);
+        bool SaveStudentsData(List<Student> students);
         // lưu danh sách môn học vào csdl
-        void SaveSubjectsData(List<Subject> subjects);
+        bool SaveSubjectsData(List<Subject> subjects);
         // lưu danh sách đăng ký vào csdl
-        void SaveRegistersData(List<Register> registers);
+        bool SaveRegistersData(List<Register> registers);
         // đọc ra danh sách sinh viên từ csdl
         List<Student> GetStudents();
         // đọc ra danh sách môn học từ csdl
@@ -20,23 +20,23 @@ namespace L913Exercises2
         // tạo kết nối đến cơ sở dữ liệu
         SqlConnection CreateConnection();
         // thêm một sinh viên mới vào csdl
-        void InsertStudent(Student student);
+        bool InsertStudent(Student student);
         // thêm một môn học mới vào csdl
-        void InsertSubject(Subject subject);
+        bool InsertSubject(Subject subject);
         // thêm một bản đăng ký mới vào csdl
-        void InsertRegister(Register register);
+        bool InsertRegister(Register register);
         // cập nhật bản đăng ký
-        void UpdateRegister(Register register);
+        bool UpdateRegister(Register register);
         // xóa bản đăng ký
-        void DeleteRegister(Register register);
+        bool DeleteRegister(Register register);
         // cập nhật môn học
-        void UpdateSubject(Subject subject);
+        bool UpdateSubject(Subject subject);
         // xóa môn học
-        void DeleteSubject(Subject subject);
+        bool DeleteSubject(Subject subject);
         // cập nhật thông tin sinh viên
-        void UpdateStudent(Register register);
+        bool UpdateStudent(Student student);
         // xóa thông tin sinh viên
-        void DeleteStudent(Student student);
+        bool DeleteStudent(Student student);
         // tìm sinh viên theo tên gần đúng
         List<Student> FindStudentByName(string name);
         // tìm môn học theo tên gần đúng
@@ -54,8 +54,8 @@ namespace L913Exercises2
         // tìm sinh viên đăng ký muộn nhất
         List<Student> FindLatestRegistedStudent();
         // cập nhật mã tự tăng của bản đăng ký
-        void UpdateRegisterAutoId();
+        bool UpdateRegisterAutoId();
         // cập nhật mã tự tăng của môn học
-        void UpdateSubjectAutoId();
+        bool UpdateSubjectAutoId();
     }
 }

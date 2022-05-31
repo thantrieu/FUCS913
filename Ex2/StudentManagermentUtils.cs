@@ -288,7 +288,7 @@ namespace L913Exercises2
         {
             Console.WriteLine("Tên sinh viên cần tìm: ");
             var name = Console.ReadLine().Trim();
-            if(!filter.IsNameValid(name))
+            if (!filter.IsNameValid(name))
             {
                 throw new InvalidNameException("Tên không hợp lệ.", name);
             }
@@ -516,7 +516,14 @@ namespace L913Exercises2
                     Console.WriteLine("Số tiết học: ");
                     var lesson = int.Parse(Console.ReadLine());
                     subjects[subjectIndex].NumOfLesson = lesson;
-                    Console.WriteLine("==> Cập nhật thành công. <==");
+                    if (controller.UpdateSubject(subjects[subjectIndex]))
+                    {
+                        Console.WriteLine("==> Cập nhật thành công. <==");
+                    }
+                    else
+                    {
+                        Console.WriteLine("==> Cập nhật thất bại. <==");
+                    }
                 }
                 else
                 {
@@ -525,6 +532,66 @@ namespace L913Exercises2
             }
         }
 
+        // tìm môn học được đăng ký nhiều nhất
+        internal void FindMostRegistedSubjects()
+        {
+            var result = controller.FindMostRegistedSubject();
+            if (result == null || result.Count == 0)
+            {
+                Console.WriteLine("==> Không có kết quả tìm kiếm. <==");
+            }
+            else
+            {
+                Console.WriteLine("==> Danh sách các môn học được đăng ký nhiều nhất: <==");
+                ShowSubjects(result);
+            }
+        }
+
+        // tìm các sinh viên đăng ký nhiều nhất
+        internal void FindEarliestRegistedStudents()
+        {
+            var result = controller.FindEarliestRegistedStudent();
+            if (result == null || result.Count == 0)
+            {
+                Console.WriteLine("==> Không có kết quả tìm kiếm. <==");
+            }
+            else
+            {
+                Console.WriteLine("==> Danh sách các sinh viên đăng ký sớm nhất: <==");
+                ShowStudents(result);
+            }
+        }
+
+        // tìm các sinh viên đăng ký muộn nhất
+        internal void FindLatestRegistedStudents()
+        {
+            var result = controller.FindLatestRegistedStudent();
+            if (result == null || result.Count == 0)
+            {
+                Console.WriteLine("==> Không có kết quả tìm kiếm. <==");
+            }
+            else
+            {
+                Console.WriteLine("==> Danh sách các sinh viên đăng ký muộn nhất: <==");
+                ShowStudents(result);
+            }
+        }
+
+
+        // tìm sinh viên đăng ký nhiều nhất
+        internal void FindMostRegistedStudents()
+        {
+            var result = controller.FindMostRegistedStudent();
+            if (result == null || result.Count == 0)
+            {
+                Console.WriteLine("==> Không có kết quả tìm kiếm. <==");
+            }
+            else
+            {
+                Console.WriteLine("==> Danh sách các sinh viên đăng ký nhiều nhất: <==");
+                ShowStudents(result);
+            }
+        }
         // cập nhật thông tin sinh viên khi biết mã sinh viên
         public void UpdateStudentInfo(List<Student> students)
         {
@@ -553,7 +620,14 @@ namespace L913Exercises2
                         throw new InvalidNameException("Họ và tên không hợp lệ.", name);
                     }
                     students[index].FullName = new FullName(name);
-                    Console.WriteLine("==> Cập nhật thành công. <==");
+                    if (controller.UpdateStudent(students[index]))
+                    {
+                        Console.WriteLine("==> Cập nhật thành công. <==");
+                    }
+                    else
+                    {
+                        Console.WriteLine("==> Cập nhật thất bại. <==");
+                    }
                 }
                 else
                 {
@@ -584,6 +658,7 @@ namespace L913Exercises2
                 if (ans == 'Y' || ans == 'y')
                 {
                     subjects.RemoveAt(index);
+                    controller.DeleteSubject(subjects[index]);
                     Console.WriteLine($"==> Môn học mã \"{idToRemove}\" đã được xóa khỏi danh sách. <==");
                 }
                 else
@@ -628,6 +703,7 @@ namespace L913Exercises2
                 if (ans == 'Y' || ans == 'y')
                 {
                     students.RemoveAt(index);
+                    controller.DeleteStudent(students[index]);
                     Console.WriteLine($"==> Sinh viên mã \"{idToRemove}\" đã được xóa khỏi danh sách. <==");
                 }
                 else
@@ -674,6 +750,7 @@ namespace L913Exercises2
                 if (ans == 'Y' || ans == 'y')
                 {
                     registers.RemoveAt(index);
+                    controller.DeleteRegister(registers[index]);
                     Console.WriteLine($"==> Bản ghi mã \"{idToRemove}\" đã được xóa khỏi danh sách. <==");
                 }
                 else
@@ -704,7 +781,8 @@ namespace L913Exercises2
 
         // thêm mới 1 môn học vào csdl
         public void InsertNewSubjectToDB(Subject subject)
-        {controller.InsertSubject(subject);
+        {
+            controller.InsertSubject(subject);
 
         }
 
